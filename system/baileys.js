@@ -27,7 +27,7 @@ const {
   const os = require("os");
   const chalk = require("chalk");
   
-async system() {
+funcition system() {
 const { state, saveState, saveCreds } = await useMultiFileAuthState(
     global.authFile,
   );
@@ -318,6 +318,4 @@ if (!er) { console.log(chalk.yellow.bold("[ ! ] ") +   chalk.red.bold(`Your IP i
     return true;
   };
   }
-  async login() {
-            await system();
-        }
+  
