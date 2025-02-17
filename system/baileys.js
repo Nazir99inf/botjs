@@ -28,7 +28,7 @@ const {
   const chalk = require("chalk");
   
 funcition system() {
-const { state, saveState, saveCreds } = await useMultiFileAuthState(
+    const { state, saveState, saveCreds } = await useMultiFileAuthState(
     global.authFile,
   );
   const msgRetryCounterMap = (MessageRetryMap) => {};
@@ -276,46 +276,6 @@ if (!er) { console.log(chalk.yellow.bold("[ ! ] ") +   chalk.red.bold(`Your IP i
     if (update.receivedPendingNotifications) {
       const deviceName = os.hostname();
     }
-  }
-  process.on("uncaughtException", console.error);
-
-  let isInit = true,
-    handler = require("./handler");
-  reloadHandler = function (restatConn) {
-    let Handler = require("./handler");
-    if (Object.keys(Handler || {}).length) handler = Handler;
-    if (restatConn) {
-      try {
-        conn.ws.close();
-      } catch {}
-      conn = {
-        ...conn,
-        ...simple.makeWASocket(connectionOptions),
-      };
-    }
-    if (!isInit) {
-      conn.ev.off("messages.upsert", conn.handler);
-      conn.ev.off("group-participants.update", conn.onParticipantsUpdate);
-      conn.ev.off("connection.update", conn.connectionUpdate);
-      conn.ev.off("creds.update", conn.credsUpdate);
-    }
-
-    conn.welcome =
-      "Welcome to *@subject* @user\nSemoga betah Dan jangan lupa baca deskripsi\n@desc";
-    conn.bye = "Goodbye @user,\nSemoga tenang di alam sana.";
-    conn.spromote = "@user telah naik jabatan";
-    conn.sdemote = "@user telah turun jabatan🗿";
-    conn.handler = handler.handler.bind(conn);
-    conn.onParticipantsUpdate = handler.participantsUpdate.bind(conn);
-    conn.connectionUpdate = connectionUpdate.bind(conn);
-    conn.credsUpdate = saveCreds.bind(conn);
-
-    conn.ev.on("messages.upsert", conn.handler);
-    conn.ev.on("group-participants.update", conn.onParticipantsUpdate);
-    conn.ev.on("connection.update", conn.connectionUpdate);
-    conn.ev.on("creds.update", conn.credsUpdate);
-    isInit = false;
-    return true;
-  };
+      }
   }
   
